@@ -1,0 +1,2031 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Group 3: KE Manut, Rachana SOPHON ,ORN Vanda">
+
+<title>Operations Research — Final Project Report</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="order_scheduling_report_files/libs/clipboard/clipboard.min.js"></script>
+<script src="order_scheduling_report_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="order_scheduling_report_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="order_scheduling_report_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="order_scheduling_report_files/libs/quarto-html/popper.min.js"></script>
+<script src="order_scheduling_report_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="order_scheduling_report_files/libs/quarto-html/anchor.min.js"></script>
+<link href="order_scheduling_report_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="order_scheduling_report_files/libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="order_scheduling_report_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="order_scheduling_report_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="order_scheduling_report_files/libs/bootstrap/bootstrap-9e3ffae467580fdb927a41352e75a2e0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#problem-statement" id="toc-problem-statement" class="nav-link active" data-scroll-target="#problem-statement">1. Problem Statement</a></li>
+  <li><a href="#dataset-description" id="toc-dataset-description" class="nav-link" data-scroll-target="#dataset-description">2. Dataset Description</a>
+  <ul class="collapse">
+  <li><a href="#data-sources" id="toc-data-sources" class="nav-link" data-scroll-target="#data-sources">Data Sources</a></li>
+  <li><a href="#data-overview" id="toc-data-overview" class="nav-link" data-scroll-target="#data-overview">Data Overview</a></li>
+  </ul></li>
+  <li><a href="#data-preparation-and-exploration" id="toc-data-preparation-and-exploration" class="nav-link" data-scroll-target="#data-preparation-and-exploration">3. Data Preparation and Exploration</a>
+  <ul class="collapse">
+  <li><a href="#data-import" id="toc-data-import" class="nav-link" data-scroll-target="#data-import">Data Import</a></li>
+  <li><a href="#data-information" id="toc-data-information" class="nav-link" data-scroll-target="#data-information">Data Information</a></li>
+  <li><a href="#merging-datasets" id="toc-merging-datasets" class="nav-link" data-scroll-target="#merging-datasets">Merging Datasets</a>
+  <ul class="collapse">
+  <li><a href="#cleaning-data" id="toc-cleaning-data" class="nav-link" data-scroll-target="#cleaning-data">Cleaning Data</a></li>
+  <li><a href="#parsing-timestamps" id="toc-parsing-timestamps" class="nav-link" data-scroll-target="#parsing-timestamps">Parsing Timestamps</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#methodology" id="toc-methodology" class="nav-link" data-scroll-target="#methodology">4 Methodology</a>
+  <ul class="collapse">
+  <li><a href="#a.-wspt-weighted-shortest-processing-time-scheduling-for-order-data" id="toc-a.-wspt-weighted-shortest-processing-time-scheduling-for-order-data" class="nav-link" data-scroll-target="#a.-wspt-weighted-shortest-processing-time-scheduling-for-order-data">a. WSPT (Weighted Shortest Processing Time) Scheduling for Order Data</a></li>
+  <li><a href="#b.-first-come-first-served-fcfs-fifo" id="toc-b.-first-come-first-served-fcfs-fifo" class="nav-link" data-scroll-target="#b.-first-come-first-served-fcfs-fifo">b. First Come First Served (FCFS / FIFO)</a></li>
+  <li><a href="#fcfs-scheduling-rule" id="toc-fcfs-scheduling-rule" class="nav-link" data-scroll-target="#fcfs-scheduling-rule">FCFS Scheduling Rule</a></li>
+  <li><a href="#completion-time-recursion" id="toc-completion-time-recursion" class="nav-link" data-scroll-target="#completion-time-recursion">Completion Time Recursion</a></li>
+  <li><a href="#c.-shortest-processing-time-spt-scheduling-for-order-data" id="toc-c.-shortest-processing-time-spt-scheduling-for-order-data" class="nav-link" data-scroll-target="#c.-shortest-processing-time-spt-scheduling-for-order-data">c.&nbsp;Shortest Processing Time (SPT) Scheduling for Order Data</a></li>
+  <li><a href="#results-and-discussion" id="toc-results-and-discussion" class="nav-link" data-scroll-target="#results-and-discussion">5 Results and Discussion</a>
+  <ul class="collapse">
+  <li><a href="#comparison-of-scheduling-methods" id="toc-comparison-of-scheduling-methods" class="nav-link" data-scroll-target="#comparison-of-scheduling-methods">Comparison of Scheduling Methods</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">6 Conclusion</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Operations Research — Final Project Report</h1>
+<p class="subtitle lead">Sequencing with Priority: An Independent Analysis</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Group 3: KE Manut, Rachana SOPHON ,ORN Vanda </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="problem-statement" class="level1">
+<h1>1. Problem Statement</h1>
+<p>In real-world operations, not all orders have the same importance. Some orders generate higher revenue, serve priority customers, or carry higher strategic value. Processing all orders strictly in the order of arrival may therefore lead to inefficient outcomes.</p>
+<p><strong>Research Question</strong></p>
+<blockquote class="blockquote">
+<p><em>How should orders be sequenced when some orders are more important than others in order to minimize total weighted delay?</em></p>
+</blockquote>
+<p>This project applies classical <strong>Operations Research scheduling theory</strong> to analyze priority-based sequencing rules.</p>
+</section>
+<section id="dataset-description" class="level1">
+<h1>2. Dataset Description</h1>
+<p>The analysis uses the <strong>Olist E-commerce Dataset</strong>, which contains real transactional data from a Brazilian online marketplace.</p>
+<section id="data-sources" class="level3">
+<h3 class="anchored" data-anchor-id="data-sources">Data Sources</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Dataset</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>olist_orders_dataset.csv</code></td>
+<td>Order-level timestamps and status</td>
+</tr>
+<tr class="even">
+<td><code>olist_order_items_dataset.csv</code></td>
+<td>Item-level order information</td>
+</tr>
+<tr class="odd">
+<td><code>olist_order_payments_dataset.csv</code></td>
+<td>Payment values and methods</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="data-overview" class="level3">
+<h3 class="anchored" data-anchor-id="data-overview">Data Overview</h3>
+<table class="var-table">
+<caption>
+Table: Attributes in <code>data_orders</code> Dataset
+</caption>
+<thead>
+<tr>
+<th>
+Variable
+</th>
+<th>
+Description
+</th>
+<th>
+Type / Example
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>order_id</code>
+</td>
+<td>
+Unique identifier for each order
+</td>
+<td>
+String (e.g., <code>e481f51c…</code>)
+</td>
+</tr>
+<tr>
+<td>
+<code>customer_id</code>
+</td>
+<td>
+Unique identifier for each customer
+</td>
+<td>
+String
+</td>
+</tr>
+<tr>
+<td>
+<code>order_status</code>
+</td>
+<td>
+Current status of the order (e.g., delivered, shipped, canceled)
+</td>
+<td>
+Category / String
+</td>
+</tr>
+<tr>
+<td>
+<code>order_purchase_timestamp</code>
+</td>
+<td>
+Timestamp when the customer placed the order
+</td>
+<td>
+DateTime
+</td>
+</tr>
+<tr>
+<td>
+<code>order_approved_at</code>
+</td>
+<td>
+Timestamp when payment was approved
+</td>
+<td>
+DateTime
+</td>
+</tr>
+<tr>
+<td>
+<code>order_delivered_carrier_date</code>
+</td>
+<td>
+Timestamp when the order was handed to the carrier (shipping start)
+</td>
+<td>
+DateTime
+</td>
+</tr>
+<tr>
+<td>
+<code>order_delivered_customer_date</code>
+</td>
+<td>
+Timestamp when the order was delivered to the customer
+</td>
+<td>
+DateTime
+</td>
+</tr>
+<tr>
+<td>
+<code>order_estimated_delivery_date</code>
+</td>
+<td>
+Estimated delivery date provided to the customer
+</td>
+<td>
+DateTime / Date
+</td>
+</tr>
+</tbody>
+</table>
+<table class="dataset-table">
+<caption>
+Variables in <code>olist_order_items</code> Dataset
+</caption>
+<thead>
+<tr>
+<th>
+Attribute
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>order_id</code>
+</td>
+<td>
+Unique identifier of the order. Used to group multiple items in the same order.
+</td>
+</tr>
+<tr>
+<td>
+<code>order_item_id</code>
+</td>
+<td>
+Sequential number identifying the item within the same order.
+</td>
+</tr>
+<tr>
+<td>
+<code>product_id</code>
+</td>
+<td>
+Unique identifier of the product purchased.
+</td>
+</tr>
+<tr>
+<td>
+<code>seller_id</code>
+</td>
+<td>
+Unique identifier of the seller responsible for the item.
+</td>
+</tr>
+<tr>
+<td>
+<code>shipping_limit_date</code>
+</td>
+<td>
+Deadline by which the seller must ship the item.
+</td>
+</tr>
+<tr>
+<td>
+<code>price</code>
+</td>
+<td>
+Price of the item (excluding shipping cost).
+</td>
+</tr>
+<tr>
+<td>
+<code>freight_value</code>
+</td>
+<td>
+Shipping cost associated with the item.
+</td>
+</tr>
+</tbody>
+</table>
+<table class="dataset-table">
+<caption>
+Variables in <code>olist_order_payments</code> Dataset
+</caption>
+<thead>
+<tr>
+<th>
+Attribute
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>order_id</code>
+</td>
+<td>
+Unique identifier of the order associated with the payment.
+</td>
+</tr>
+<tr>
+<td>
+<code>payment_sequential</code>
+</td>
+<td>
+Sequential number of the payment within the same order (used when multiple payments exist).
+</td>
+</tr>
+<tr>
+<td>
+<code>payment_type</code>
+</td>
+<td>
+Payment method used by the customer (e.g., credit card, boleto, voucher).
+</td>
+</tr>
+<tr>
+<td>
+<code>payment_installments</code>
+</td>
+<td>
+Number of installments chosen for the payment.
+</td>
+</tr>
+<tr>
+<td>
+<code>payment_value</code>
+</td>
+<td>
+Total monetary value of the payment.
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="data-preparation-and-exploration" class="level1">
+<h1>3. Data Preparation and Exploration</h1>
+<section id="data-import" class="level3">
+<h3 class="anchored" data-anchor-id="data-import">Data Import</h3>
+<div id="d82fafc2" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Import Libraries and Data</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>data_orders <span class="op">=</span> pd.read_csv(<span class="st">"olist_orders_dataset.csv"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>data_orders_items <span class="op">=</span> pd.read_csv(<span class="st">"olist_order_items_dataset.csv"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>data_orders_payments <span class="op">=</span> pd.read_csv(<span class="st">"olist_order_payments_dataset.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+<section id="data-information" class="level3">
+<h3 class="anchored" data-anchor-id="data-information">Data Information</h3>
+<div id="07e52cd1" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Show Data Information</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data_orders.info()</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>data_orders_items.info()</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>data_orders_payments.info()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 99441 entries, 0 to 99440
+Data columns (total 8 columns):
+ #   Column                         Non-Null Count  Dtype 
+---  ------                         --------------  ----- 
+ 0   order_id                       99441 non-null  object
+ 1   customer_id                    99441 non-null  object
+ 2   order_status                   99441 non-null  object
+ 3   order_purchase_timestamp       99441 non-null  object
+ 4   order_approved_at              99281 non-null  object
+ 5   order_delivered_carrier_date   97658 non-null  object
+ 6   order_delivered_customer_date  96476 non-null  object
+ 7   order_estimated_delivery_date  99441 non-null  object
+dtypes: object(8)
+memory usage: 6.1+ MB
+&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 112650 entries, 0 to 112649
+Data columns (total 7 columns):
+ #   Column               Non-Null Count   Dtype  
+---  ------               --------------   -----  
+ 0   order_id             112650 non-null  object 
+ 1   order_item_id        112650 non-null  int64  
+ 2   product_id           112650 non-null  object 
+ 3   seller_id            112650 non-null  object 
+ 4   shipping_limit_date  112650 non-null  object 
+ 5   price                112650 non-null  float64
+ 6   freight_value        112650 non-null  float64
+dtypes: float64(2), int64(1), object(4)
+memory usage: 6.0+ MB
+&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 103886 entries, 0 to 103885
+Data columns (total 5 columns):
+ #   Column                Non-Null Count   Dtype  
+---  ------                --------------   -----  
+ 0   order_id              103886 non-null  object 
+ 1   payment_sequential    103886 non-null  int64  
+ 2   payment_type          103886 non-null  object 
+ 3   payment_installments  103886 non-null  int64  
+ 4   payment_value         103886 non-null  float64
+dtypes: float64(1), int64(2), object(2)
+memory usage: 4.0+ MB</code></pre>
+</div>
+</div>
+</section>
+<section id="merging-datasets" class="level2">
+<h2 class="anchored" data-anchor-id="merging-datasets">Merging Datasets</h2>
+<div id="cb7a4d2f" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Merge Datasets</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>combine_data <span class="op">=</span> pd.merge(data_orders, data_orders_items,  on<span class="op">=</span><span class="st">'order_id'</span>, how<span class="op">=</span><span class="st">'inner'</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>combine_data_final<span class="op">=</span> pd.merge(combine_data, data_orders_payments, on<span class="op">=</span><span class="st">'order_id'</span>, how<span class="op">=</span><span class="st">'inner'</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>combine_data_final.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">order_id</th>
+<th data-quarto-table-cell-role="th">customer_id</th>
+<th data-quarto-table-cell-role="th">order_status</th>
+<th data-quarto-table-cell-role="th">order_purchase_timestamp</th>
+<th data-quarto-table-cell-role="th">order_approved_at</th>
+<th data-quarto-table-cell-role="th">order_delivered_carrier_date</th>
+<th data-quarto-table-cell-role="th">order_delivered_customer_date</th>
+<th data-quarto-table-cell-role="th">order_estimated_delivery_date</th>
+<th data-quarto-table-cell-role="th">order_item_id</th>
+<th data-quarto-table-cell-role="th">product_id</th>
+<th data-quarto-table-cell-role="th">seller_id</th>
+<th data-quarto-table-cell-role="th">shipping_limit_date</th>
+<th data-quarto-table-cell-role="th">price</th>
+<th data-quarto-table-cell-role="th">freight_value</th>
+<th data-quarto-table-cell-role="th">payment_sequential</th>
+<th data-quarto-table-cell-role="th">payment_type</th>
+<th data-quarto-table-cell-role="th">payment_installments</th>
+<th data-quarto-table-cell-role="th">payment_value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>e481f51cbdc54678b7cc49136f2d6af7</td>
+<td>9ef432eb6251297304e76186b10a928d</td>
+<td>delivered</td>
+<td>10/2/17 10:56</td>
+<td>10/2/17 11:07</td>
+<td>10/4/17 19:55</td>
+<td>10/10/17 21:25</td>
+<td>10/18/17 0:00</td>
+<td>1</td>
+<td>87285b34884572647811a353c7ac498a</td>
+<td>3504c0cb71d7fa48d967e0e4c94d59d9</td>
+<td>10/6/17 11:07</td>
+<td>29.99</td>
+<td>8.72</td>
+<td>1</td>
+<td>credit_card</td>
+<td>1</td>
+<td>18.12</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>e481f51cbdc54678b7cc49136f2d6af7</td>
+<td>9ef432eb6251297304e76186b10a928d</td>
+<td>delivered</td>
+<td>10/2/17 10:56</td>
+<td>10/2/17 11:07</td>
+<td>10/4/17 19:55</td>
+<td>10/10/17 21:25</td>
+<td>10/18/17 0:00</td>
+<td>1</td>
+<td>87285b34884572647811a353c7ac498a</td>
+<td>3504c0cb71d7fa48d967e0e4c94d59d9</td>
+<td>10/6/17 11:07</td>
+<td>29.99</td>
+<td>8.72</td>
+<td>3</td>
+<td>voucher</td>
+<td>1</td>
+<td>2.00</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>e481f51cbdc54678b7cc49136f2d6af7</td>
+<td>9ef432eb6251297304e76186b10a928d</td>
+<td>delivered</td>
+<td>10/2/17 10:56</td>
+<td>10/2/17 11:07</td>
+<td>10/4/17 19:55</td>
+<td>10/10/17 21:25</td>
+<td>10/18/17 0:00</td>
+<td>1</td>
+<td>87285b34884572647811a353c7ac498a</td>
+<td>3504c0cb71d7fa48d967e0e4c94d59d9</td>
+<td>10/6/17 11:07</td>
+<td>29.99</td>
+<td>8.72</td>
+<td>2</td>
+<td>voucher</td>
+<td>1</td>
+<td>18.59</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>53cdb2fc8bc7dce0b6741e2150273451</td>
+<td>b0830fb4747a6c6d20dea0b8c802d7ef</td>
+<td>delivered</td>
+<td>7/24/18 20:41</td>
+<td>7/26/18 3:24</td>
+<td>7/26/18 14:31</td>
+<td>8/7/18 15:27</td>
+<td>8/13/18 0:00</td>
+<td>1</td>
+<td>595fac2a385ac33a80bd5114aec74eb8</td>
+<td>289cdb325fb7e7f891c38608bf9e0962</td>
+<td>7/30/18 3:24</td>
+<td>118.70</td>
+<td>22.76</td>
+<td>1</td>
+<td>boleto</td>
+<td>1</td>
+<td>141.46</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>47770eb9100c2d0c44946d9cf07ec65d</td>
+<td>41ce2a54c0b03bf3443c3d931a367089</td>
+<td>delivered</td>
+<td>8/8/18 8:38</td>
+<td>8/8/18 8:55</td>
+<td>8/8/18 13:50</td>
+<td>8/17/18 18:06</td>
+<td>9/4/18 0:00</td>
+<td>1</td>
+<td>aa4383b373c6aca5d8797843e5594415</td>
+<td>4869f7a5dfa277a7dca6462dcf3b52b2</td>
+<td>8/13/18 8:55</td>
+<td>159.90</td>
+<td>19.22</td>
+<td>1</td>
+<td>credit_card</td>
+<td>3</td>
+<td>179.12</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="fe534346" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Data missing values check</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>combine_data_final.isnull().<span class="bu">sum</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>order_id                            0
+customer_id                         0
+order_status                        0
+order_purchase_timestamp            0
+order_approved_at                  15
+order_delivered_carrier_date     1245
+order_delivered_customer_date    2567
+order_estimated_delivery_date       0
+order_item_id                       0
+product_id                          0
+seller_id                           0
+shipping_limit_date                 0
+price                               0
+freight_value                       0
+payment_sequential                  0
+payment_type                        0
+payment_installments                0
+payment_value                       0
+dtype: int64</code></pre>
+</div>
+</div>
+<section id="cleaning-data" class="level3">
+<h3 class="anchored" data-anchor-id="cleaning-data">Cleaning Data</h3>
+<div id="aae5d89c" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Clean Data</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> combine_data_final.dropna()</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>df.isnull().<span class="bu">sum</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>order_id                         0
+customer_id                      0
+order_status                     0
+order_purchase_timestamp         0
+order_approved_at                0
+order_delivered_carrier_date     0
+order_delivered_customer_date    0
+order_estimated_delivery_date    0
+order_item_id                    0
+product_id                       0
+seller_id                        0
+shipping_limit_date              0
+price                            0
+freight_value                    0
+payment_sequential               0
+payment_type                     0
+payment_installments             0
+payment_value                    0
+dtype: int64</code></pre>
+</div>
+</div>
+</section>
+<section id="parsing-timestamps" class="level3">
+<h3 class="anchored" data-anchor-id="parsing-timestamps">Parsing Timestamps</h3>
+<div id="0d6af561" class="cell" data-execution_count="6">
+<details class="code-fold">
+<summary>Parse Timestamps</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"order_purchase_timestamp"</span>] <span class="op">=</span> pd.to_datetime(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"order_purchase_timestamp"</span>], errors<span class="op">=</span><span class="st">"coerce"</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"order_delivered_customer_date"</span>] <span class="op">=</span> pd.to_datetime(</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"order_delivered_customer_date"</span>], errors<span class="op">=</span><span class="st">"coerce"</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p><strong>Description</strong> The timestamp variables are converted from string format to datetime objects to enable time-based operations such as sorting orders and calculating order processing durations. This step is required for computing fulfillment time used in FCFS, SPT, and WSPT scheduling models.</p>
+<p>The parameter <code>errors="coerce"</code> ensures that invalid or missing timestamps are safely converted to <code>NaT</code>, preventing execution errors and allowing incomplete orders to be excluded from analysis.</p>
+</section>
+</section>
+</section>
+<section id="methodology" class="level1">
+<h1>4 Methodology</h1>
+<section id="a.-wspt-weighted-shortest-processing-time-scheduling-for-order-data" class="level3">
+<h3 class="anchored" data-anchor-id="a.-wspt-weighted-shortest-processing-time-scheduling-for-order-data">a. WSPT (Weighted Shortest Processing Time) Scheduling for Order Data</h3>
+<p>This process computes an <strong>optimal processing sequence</strong> for customer orders using the <strong>Weighted Shortest Processing Time (WSPT)</strong> rule. WSPT is a classical scheduling method used to <strong>minimize total weighted completion time</strong>.</p>
+<section id="scheduling-objective" class="level4">
+<h4 class="anchored" data-anchor-id="scheduling-objective">Scheduling Objective</h4>
+<p>Given a set of jobs (orders), the objective is to minimize:</p>
+<p><span class="math display">\[
+\min \sum_{j} w_j C_j
+\]</span></p>
+<p>where:</p>
+<ul>
+<li><span class="math inline">\(j\)</span> is an order<br>
+</li>
+<li><span class="math inline">\(p_j\)</span> is the processing time of order <span class="math inline">\(j\)</span><br>
+</li>
+<li><span class="math inline">\(w_j\)</span> is the weight (importance) of order <span class="math inline">\(j\)</span><br>
+</li>
+<li><span class="math inline">\(C_j\)</span> is the completion time of order <span class="math inline">\(j\)</span></li>
+</ul>
+</section>
+<section id="job-definition" class="level4">
+<h4 class="anchored" data-anchor-id="job-definition">Job Definition</h4>
+<p>Each <strong>order</strong> in the dataset is treated as a single job:</p>
+<p><span class="math display">\[
+j \equiv \texttt{order\_id}
+\]</span></p>
+<p>Because the dataset may contain multiple rows per order, the data is first aggregated to the order level.</p>
+</section>
+<section id="processing-time" class="level4">
+<h4 class="anchored" data-anchor-id="processing-time">Processing Time</h4>
+<p>The processing time is defined as the order fulfillment duration:</p>
+<p><span class="math display">\[
+\text{processing\_time\_days}
+=
+\text{order\_delivered\_customer\_date}
+-
+\text{order\_purchase\_timestamp}
+\]</span></p>
+<p>The processing time is measured in <strong>days</strong>.</p>
+</section>
+<section id="weight" class="level4">
+<h4 class="anchored" data-anchor-id="weight">Weight</h4>
+<p>The weight represents the importance or priority of an order and is defined as:</p>
+<p><span class="math display">\[
+\text{weight} = \texttt{payment\_value}
+\]</span></p>
+<p>Orders with higher payment values are considered more important.</p>
+</section>
+<section id="wspt-index" class="level4">
+<h4 class="anchored" data-anchor-id="wspt-index">WSPT Index</h4>
+<p>For each order, the <strong>WSPT index</strong> is computed as:</p>
+<p><span class="math display">\[
+\text{WSPT}
+=
+\frac{\text{weight}}{\text{processing\_time\_days}}
+\]</span></p>
+<p>This index captures the <strong>value per unit processing time</strong>.</p>
+</section>
+<section id="scheduling-rule" class="level4">
+<h4 class="anchored" data-anchor-id="scheduling-rule">Scheduling Rule</h4>
+<p>Orders are scheduled according to the following rule:</p>
+<ul>
+<li><strong>Higher WSPT ⇒ higher scheduling priority</strong></li>
+<li>Orders with large payment values and short processing times are processed first</li>
+<li>Orders with small payment values and long processing times are processed later</li>
+</ul>
+</section>
+<section id="completion-time-calculation" class="level4">
+<h4 class="anchored" data-anchor-id="completion-time-calculation">Completion Time Calculation</h4>
+<p>Once orders are sorted by decreasing WSPT index, completion times are computed cumulatively:</p>
+<p><span class="math display">\[
+C_k = \sum_{m=1}^{k} p_{\pi(m)}
+\]</span></p>
+<p>where <span class="math inline">\(\pi(m)\)</span> denotes the order sequence determined by WSPT.</p>
+<p>The total weighted completion cost is:</p>
+<p><span class="math display">\[
+\sum_{k} w_{\pi(k)} C_k
+\]</span></p>
+</section>
+<section id="summary" class="level4">
+<h4 class="anchored" data-anchor-id="summary">Summary</h4>
+<ul>
+<li>Treats each <code>order_id</code> as a job<br>
+</li>
+<li>Uses fulfillment duration as processing time<br>
+</li>
+<li>Uses payment value as weight<br>
+</li>
+<li>Applies the WSPT priority rule<br>
+</li>
+<li>Minimizes total weighted completion time</li>
+</ul>
+<p>WSPT is optimal for single-machine scheduling problems where all jobs are available at the start and preemption is not allowed.</p>
+<div id="4d02a4b9" class="cell" data-execution_count="7">
+<details class="code-fold">
+<summary>WSPT Scheduling Implementation</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Aggregate to order-level jobs</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>orders <span class="op">=</span> (</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    df.dropna(subset<span class="op">=</span>[<span class="st">"order_purchase_timestamp"</span>, <span class="st">"order_delivered_customer_date"</span>])</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>      .groupby(<span class="st">"order_id"</span>, as_index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>      .agg(</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>          purchase_time<span class="op">=</span>(<span class="st">"order_purchase_timestamp"</span>, <span class="st">"min"</span>),</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>          delivered_time<span class="op">=</span>(<span class="st">"order_delivered_customer_date"</span>, <span class="st">"max"</span>),</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>          weight<span class="op">=</span>(<span class="st">"payment_value"</span>, <span class="st">"sum"</span>),</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>orders[<span class="st">"processing_time_days"</span>] <span class="op">=</span> (</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    (orders[<span class="st">"delivered_time"</span>] <span class="op">-</span> orders[<span class="st">"purchase_time"</span>]).dt.total_seconds() <span class="op">/</span> <span class="fl">86400.0</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Keep only valid jobs (positive weight, positive processing time)</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>orders <span class="op">=</span> orders[(orders[<span class="st">"weight"</span>] <span class="op">&gt;</span> <span class="dv">0</span>) <span class="op">&amp;</span> (orders[<span class="st">"processing_time_days"</span>] <span class="op">&gt;</span> <span class="dv">0</span>)].copy()</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="co"># WSPT index and WSPT schedule</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>orders[<span class="st">"WSPT"</span>] <span class="op">=</span> orders[<span class="st">"weight"</span>] <span class="op">/</span> orders[<span class="st">"processing_time_days"</span>]</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>wspt_schedule <span class="op">=</span> orders.sort_values(<span class="st">"WSPT"</span>, ascending<span class="op">=</span><span class="va">False</span>).reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Completion times and total weighted completion cost</span></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>wspt_schedule[<span class="st">"Cj_days"</span>] <span class="op">=</span> wspt_schedule[<span class="st">"processing_time_days"</span>].cumsum()</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>wspt_schedule[<span class="st">"wCj"</span>] <span class="op">=</span> wspt_schedule[<span class="st">"weight"</span>] <span class="op">*</span> wspt_schedule[<span class="st">"Cj_days"</span>]</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>total_weighted_completion_cost <span class="op">=</span> wspt_schedule[<span class="st">"wCj"</span>].<span class="bu">sum</span>()</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a><span class="co">#print results</span></span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Total jobs (orders):"</span>, <span class="bu">len</span>(wspt_schedule))</span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Total weighted completion time (sum w_j * C_j):"</span>, total_weighted_completion_cost)</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Top 10 orders by WSPT priority:"</span>)</span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(wspt_schedule[[<span class="st">"order_id"</span>, <span class="st">"processing_time_days"</span>, <span class="st">"weight"</span>, <span class="st">"WSPT"</span>]].head(<span class="dv">10</span>))</span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>wspt_schedule.to_csv(<span class="st">"wspt_schedule_orders.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Total jobs (orders): 96460
+Total weighted completion time (sum w_j * C_j): 4592290542134.892
+
+Top 10 orders by WSPT priority:
+                           order_id  processing_time_days     weight  \
+0  03caa2c082116e1d31e67e9ae3700499             18.123611  109312.64   
+1  8339b608be0d84fca9d8da68b58332c3              0.863194    4595.04   
+2  ab14fdcfbe524636d65ee38360e22ce8             10.118750   45256.00   
+3  1b15974a0141d54e36626dca3fdc731a             10.994444   44048.00   
+4  cd51709c98c738351915f79c4318675e              3.188889    9443.35   
+5  736e1922ae60d0d6a89247b851902527             11.301389   29099.52   
+6  19f05b5a76e0e3f1df1ebaeef9bd2f8d              3.853472    9759.75   
+7  7f5d123edea7962b20bf26e29262f9e5              1.714583    4246.56   
+8  9aec4e1ae90b23c7bf2d2b3bfafbd943              9.056944   22346.60   
+9  f60ce04ff8060152c83c7c97e246d6a8              5.998611   14401.00   
+
+          WSPT  
+0  6031.504391  
+1  5323.296541  
+2  4472.489191  
+3  4006.387064  
+4  2961.329268  
+5  2574.862283  
+6  2532.715805  
+7  2476.730012  
+8  2467.344272  
+9  2400.722389  </code></pre>
+</div>
+</div>
+<p><em>Description</em> The resulting schedule orders the jobs (orders) by decreasing WSPT index, ensuring that higher priority orders are processed first. The total weighted completion time is computed to evaluate the efficiency of the schedule.</p>
+</section>
+</section>
+<section id="b.-first-come-first-served-fcfs-fifo" class="level3">
+<h3 class="anchored" data-anchor-id="b.-first-come-first-served-fcfs-fifo">b. First Come First Served (FCFS / FIFO)</h3>
+<section id="job-set" class="level4">
+<h4 class="anchored" data-anchor-id="job-set">Job Set</h4>
+<p>Let there be a set of orders (jobs):</p>
+<p><span class="math display">\[
+\mathcal{J} = {1, 2, \dots, n}
+\]</span></p>
+<p><span class="math display">\[
+\text{For each job:}
+\]</span></p>
+<ul>
+<li>Arrival (release) time:</li>
+</ul>
+<p><span class="math display">\[
+r_i = \text{order purchase timestamp}_i
+\]</span></p>
+<ul>
+<li>Processing time:</li>
+</ul>
+<p><span class="math display">\[
+p_i
+\]</span></p>
+<ul>
+<li>Completion time:</li>
+</ul>
+<p><span class="math display">\[
+C_i
+\]</span></p>
+</section>
+</section>
+<section id="fcfs-scheduling-rule" class="level3">
+<h3 class="anchored" data-anchor-id="fcfs-scheduling-rule">FCFS Scheduling Rule</h3>
+<p>Jobs are processed in <strong>non-decreasing order of arrival time</strong>:</p>
+<p><span class="math display">\[
+r_{\pi(1)} \le r_{\pi(2)} \le \dots \le r_{\pi(n)}
+\]</span></p>
+<p>where:</p>
+<p><span class="math display">\[
+\pi \text{ is the FCFS permutation}
+\]</span></p>
+</section>
+<section id="completion-time-recursion" class="level3">
+<h3 class="anchored" data-anchor-id="completion-time-recursion">Completion Time Recursion</h3>
+<p>Assuming a <strong>single machine</strong> and <strong>no preemption</strong>:</p>
+<p><span class="math display">\[
+C_{\pi(1)} = r_{\pi(1)} + p_{\pi(1)}
+\]</span></p>
+<p><span class="math display">\[
+C_{\pi(k)} = \max \left( r_{\pi(k)}, C_{\pi(k-1)} \right) + p_{\pi(k)},
+  \quad k = 2, \dots, n
+  \]</span></p>
+<section id="flow-time-sojourn-time" class="level4">
+<h4 class="anchored" data-anchor-id="flow-time-sojourn-time">Flow Time (Sojourn Time)</h4>
+<p><span class="math display">\[
+F_i = C_i - r_i
+\]</span></p>
+</section>
+<section id="average-flow-time" class="level4">
+<h4 class="anchored" data-anchor-id="average-flow-time">Average Flow Time</h4>
+<p><span class="math display">\[
+\bar{F} = \frac{1}{n} \sum_{i=1}^{n} F_i
+\]</span></p>
+</section>
+<section id="weighted-flow-time-optional" class="level4">
+<h4 class="anchored" data-anchor-id="weighted-flow-time-optional">Weighted Flow Time (Optional)</h4>
+<p>If each job has a weight:</p>
+<p><span class="math display">\[
+w_i
+\]</span></p>
+<p>then the <strong>total weighted flow time</strong> is:</p>
+<p><span class="math display">\[
+\sum_{i=1}^{n} w_i \left( C_i - r_i \right)
+\]</span></p>
+</section>
+<section id="key-properties-of-fcfs" class="level4">
+<h4 class="anchored" data-anchor-id="key-properties-of-fcfs">Key Properties of FCFS</h4>
+<ul>
+<li>Non-preemptive</li>
+<li>Fair (no starvation)</li>
+<li>Sensitive to long jobs arriving early (convoy effect)</li>
+<li>Not optimal for minimizing average or weighted completion time</li>
+</ul>
+<div id="10577221" class="cell" data-execution_count="8">
+<details class="code-fold">
+<summary>FCFS Scheduling Implementation</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Aggregate to order level (one job per order)</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>orders <span class="op">=</span> (</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    df.groupby(<span class="st">"order_id"</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>      .agg(</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>          arrival_time<span class="op">=</span>(<span class="st">"order_purchase_timestamp"</span>, <span class="st">"min"</span>),</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>          delivery_time<span class="op">=</span>(<span class="st">"order_delivered_customer_date"</span>, <span class="st">"max"</span>),</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>          payment_value<span class="op">=</span>(<span class="st">"payment_value"</span>, <span class="st">"sum"</span>)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>      .reset_index()</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Processing time (p_i)</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>orders[<span class="st">"processing_time"</span>] <span class="op">=</span> (</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    orders[<span class="st">"delivery_time"</span>] <span class="op">-</span> orders[<span class="st">"arrival_time"</span>]</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>).dt.total_seconds() <span class="op">/</span> (<span class="dv">24</span> <span class="op">*</span> <span class="dv">3600</span>)  <span class="co"># days</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove invalid rows</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>orders <span class="op">=</span> orders[orders[<span class="st">"processing_time"</span>] <span class="op">&gt;</span> <span class="dv">0</span>]</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="co"># FCFS sequence (sort by arrival time)</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>orders <span class="op">=</span> orders.sort_values(<span class="st">"arrival_time"</span>).reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Completion time C_i</span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>completion_times <span class="op">=</span> []</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>current_time <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> _, row <span class="kw">in</span> orders.iterrows():</span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>    current_time <span class="op">+=</span> row[<span class="st">"processing_time"</span>]</span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>    completion_times.append(current_time)</span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>orders[<span class="st">"completion_time"</span>] <span class="op">=</span> completion_times</span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Flow time F_i = C_i - r_i</span></span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a><span class="co"># (Measured from time zero in FCFS order)</span></span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>orders[<span class="st">"flow_time"</span>] <span class="op">=</span> orders[<span class="st">"completion_time"</span>]</span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Weighted flow time w_i * F_i</span></span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a>orders[<span class="st">"weighted_flow_time"</span>] <span class="op">=</span> orders[<span class="st">"payment_value"</span>] <span class="op">*</span> orders[<span class="st">"flow_time"</span>]</span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Total Weighted Flow Time (FCFS)</span></span>
+<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a>total_weighted_flow_time <span class="op">=</span> orders[<span class="st">"weighted_flow_time"</span>].<span class="bu">sum</span>()</span>
+<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a><span class="co"># Results</span></span>
+<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(orders[[</span>
+<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a>    <span class="st">"order_id"</span>,</span>
+<span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a>    <span class="st">"arrival_time"</span>,</span>
+<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a>    <span class="st">"processing_time"</span>,</span>
+<span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a>    <span class="st">"completion_time"</span>,</span>
+<span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a>    <span class="st">"flow_time"</span>,</span>
+<span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a>    <span class="st">"payment_value"</span>,</span>
+<span id="cb12-51"><a href="#cb12-51" aria-hidden="true" tabindex="-1"></a>    <span class="st">"weighted_flow_time"</span></span>
+<span id="cb12-52"><a href="#cb12-52" aria-hidden="true" tabindex="-1"></a>]].head())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                           order_id        arrival_time  processing_time  \
+0  3b697a20d9e427646d92567910af6d57 2016-10-03 09:44:00        23.179167   
+1  be5bc2f0da14d8071e2d45451ad119d9 2016-10-03 16:56:00        24.057639   
+2  65d1e226dfaeb8cdc42f665422522d14 2016-10-03 21:01:00        35.581250   
+3  a41c8759fbe7aab36ea07e038b2d4465 2016-10-03 21:13:00        30.572917   
+4  d207cc272675637bfed0062edffd0818 2016-10-03 22:06:00        27.542361   
+
+   completion_time   flow_time  payment_value  weighted_flow_time  
+0        23.179167   23.179167          45.46         1053.724917  
+1        47.236806   47.236806          39.09         1846.486729  
+2        82.818056   82.818056          35.61         2949.150958  
+3       113.390972  113.390972          53.73         6092.496938  
+4       140.933333  140.933333         133.46        18808.962667  </code></pre>
+</div>
+</div>
+<p><em>Description</em> The FCFS scheduling implementation processes orders in the order they were placed, calculating completion times and flow times accordingly. The total weighted flow time is computed to evaluate the schedule’s performance.</p>
+</section>
+</section>
+<section id="c.-shortest-processing-time-spt-scheduling-for-order-data" class="level3">
+<h3 class="anchored" data-anchor-id="c.-shortest-processing-time-spt-scheduling-for-order-data">c.&nbsp;Shortest Processing Time (SPT) Scheduling for Order Data</h3>
+<p>Let each order be indexed by ( i {1,,n} ).</p>
+<section id="aggregate-per-order" class="level4">
+<h4 class="anchored" data-anchor-id="aggregate-per-order">Aggregate per order</h4>
+<p>Arrival time: <span class="math display">\[
+a_i = \min(\texttt{order\_purchase\_timestamp})
+\]</span></p>
+<p>Delivery time: <span class="math display">\[
+d_i = \max(\texttt{order\_delivered\_customer\_date})
+\]</span></p>
+<p>Payment value (weight): <span class="math display">\[
+w_i = \sum(\texttt{payment\_value})
+\]</span></p>
+</section>
+<section id="processing-time-in-days" class="level4">
+<h4 class="anchored" data-anchor-id="processing-time-in-days">Processing time (in days)</h4>
+<p>Processing time is the elapsed time between delivery and arrival: <span class="math display">\[
+p_i = \frac{d_i - a_i}{24 \cdot 3600}
+\]</span></p>
+<p>Only valid orders are kept: <span class="math display">\[
+p_i &gt; 0
+\]</span></p>
+</section>
+<section id="spt-rule-shortest-processing-time-first" class="level4">
+<h4 class="anchored" data-anchor-id="spt-rule-shortest-processing-time-first">SPT rule (Shortest Processing Time first)</h4>
+<p>Orders are sorted in nondecreasing processing time.<br>
+Let ( ) be the permutation such that: <span class="math display">\[
+p_{\pi(1)} \le p_{\pi(2)} \le \dots \le p_{\pi(n)}
+\]</span></p>
+<p>This defines the <strong>SPT sequence</strong>.</p>
+</section>
+<section id="completion-times-under-spt" class="level4">
+<h4 class="anchored" data-anchor-id="completion-times-under-spt">Completion times under SPT</h4>
+<p>Assume processing starts at time zero and jobs are processed sequentially.</p>
+<p>Completion time of the (k)-th job in the SPT order: <span class="math display">\[
+C_{\pi(k)} = \sum_{j=1}^{k} p_{\pi(j)}
+\]</span></p>
+<p>Equivalent recursive form: <span class="math display">\[
+C_{\pi(1)} = p_{\pi(1)}, \qquad
+C_{\pi(k)} = C_{\pi(k-1)} + p_{\pi(k)}, \; k \ge 2
+\]</span></p>
+</section>
+<section id="flow-time" class="level4">
+<h4 class="anchored" data-anchor-id="flow-time">Flow time</h4>
+<p>In the implementation, flow time is measured from time zero: <span class="math display">\[
+F_{\pi(k)} = C_{\pi(k)}
+\]</span></p>
+</section>
+<section id="weighted-flow-time" class="level4">
+<h4 class="anchored" data-anchor-id="weighted-flow-time">Weighted flow time</h4>
+<p>Using payment value as the job weight: <span class="math display">\[
+WF_{\pi(k)} = w_{\pi(k)} \cdot F_{\pi(k)}
+\]</span></p>
+</section>
+<section id="total-weighted-flow-time-spt-objective" class="level4">
+<h4 class="anchored" data-anchor-id="total-weighted-flow-time-spt-objective">Total weighted flow time (SPT objective)</h4>
+<p>The total weighted flow time under SPT is: <span class="math display">\[
+\sum_{k=1}^{n} WF_{\pi(k)}
+=
+\sum_{k=1}^{n} w_{\pi(k)} \, C_{\pi(k)}
+\]</span></p>
+<div id="1186d0d7" class="cell" data-execution_count="9">
+<details class="code-fold">
+<summary>SPT Scheduling Implementation</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>orders <span class="op">=</span> (</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    df.groupby(<span class="st">"order_id"</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>      .agg(</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>          arrival_time<span class="op">=</span>(<span class="st">"order_purchase_timestamp"</span>, <span class="st">"min"</span>),</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>          delivery_time<span class="op">=</span>(<span class="st">"order_delivered_customer_date"</span>, <span class="st">"max"</span>),</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>          payment_value<span class="op">=</span>(<span class="st">"payment_value"</span>, <span class="st">"sum"</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>      .reset_index()</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Processing time p_i (days)</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>orders[<span class="st">"processing_time"</span>] <span class="op">=</span> (</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    orders[<span class="st">"delivery_time"</span>] <span class="op">-</span> orders[<span class="st">"arrival_time"</span>]</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>).dt.total_seconds() <span class="op">/</span> (<span class="dv">24</span> <span class="op">*</span> <span class="dv">3600</span>)</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove invalid rows</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>orders <span class="op">=</span> orders[orders[<span class="st">"processing_time"</span>] <span class="op">&gt;</span> <span class="dv">0</span>].copy()</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="co"># SPT sequence (shortest processing time first)</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>spt_orders <span class="op">=</span> orders.sort_values(<span class="st">"processing_time"</span>).reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Completion time C_i under SPT</span></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>completion_times <span class="op">=</span> []</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>current_time <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> _, row <span class="kw">in</span> spt_orders.iterrows():</span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>    current_time <span class="op">+=</span> row[<span class="st">"processing_time"</span>]</span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>    completion_times.append(current_time)</span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>spt_orders[<span class="st">"completion_time"</span>] <span class="op">=</span> completion_times</span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Flow time F_i (measured from time zero here)</span></span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>spt_orders[<span class="st">"flow_time"</span>] <span class="op">=</span> spt_orders[<span class="st">"completion_time"</span>]</span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Weighted flow time (optional)</span></span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>spt_orders[<span class="st">"weighted_flow_time"</span>] <span class="op">=</span> spt_orders[<span class="st">"payment_value"</span>] <span class="op">*</span> spt_orders[<span class="st">"flow_time"</span>]</span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Total weighted flow time (SPT)</span></span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a>total_weighted_flow_time_spt <span class="op">=</span> spt_orders[<span class="st">"weighted_flow_time"</span>].<span class="bu">sum</span>()</span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Results</span></span>
+<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(spt_orders[[</span>
+<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a>    <span class="st">"order_id"</span>,</span>
+<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a>    <span class="st">"arrival_time"</span>,</span>
+<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a>    <span class="st">"processing_time"</span>,</span>
+<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a>    <span class="st">"completion_time"</span>,</span>
+<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a>    <span class="st">"flow_time"</span>,</span>
+<span id="cb14-48"><a href="#cb14-48" aria-hidden="true" tabindex="-1"></a>    <span class="st">"payment_value"</span>,</span>
+<span id="cb14-49"><a href="#cb14-49" aria-hidden="true" tabindex="-1"></a>    <span class="st">"weighted_flow_time"</span></span>
+<span id="cb14-50"><a href="#cb14-50" aria-hidden="true" tabindex="-1"></a>]].head())</span>
+<span id="cb14-51"><a href="#cb14-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-52"><a href="#cb14-52" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Total Weighted Flow Time (SPT):"</span>, total_weighted_flow_time_spt)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                           order_id        arrival_time  processing_time  \
+0  1d893dd7ca5f77ebf5f59f0d2017eee0 2017-06-19 08:19:00         0.533333   
+1  434cecee7d1a65fc65358a632b6f725f 2017-05-29 13:21:00         0.781250   
+2  f3c6775ba3d2d9fe2826f93b71f12008 2017-07-04 11:37:00         0.855556   
+3  8339b608be0d84fca9d8da68b58332c3 2018-06-26 20:48:00         0.863194   
+4  bb5a519e352b45b714192a02ffe25681 2017-05-31 11:11:00         0.890972   
+
+   completion_time  flow_time  payment_value  weighted_flow_time  
+0         0.533333   0.533333         355.20          189.440000  
+1         1.314583   1.314583          62.76           82.503250  
+2         2.170139   2.170139         194.48          422.048611  
+3         3.033333   3.033333        4595.04        13938.288000  
+4         3.924306   3.924306         116.36          456.632194  
+
+Total Weighted Flow Time (SPT): 8327332991555.177</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="results-and-discussion" class="level2">
+<h2 class="anchored" data-anchor-id="results-and-discussion">5 Results and Discussion</h2>
+<section id="comparison-of-scheduling-methods" class="level3">
+<h3 class="anchored" data-anchor-id="comparison-of-scheduling-methods">Comparison of Scheduling Methods</h3>
+<div id="997e787f" class="cell" data-execution_count="10">
+<details class="code-fold">
+<summary>Compare WSPT vs FCFS vs SPT + % improvement + cumulative cost curves</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>orders <span class="op">=</span> (</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    df.dropna(subset<span class="op">=</span>[<span class="st">"order_purchase_timestamp"</span>, <span class="st">"order_delivered_customer_date"</span>, <span class="st">"payment_value"</span>])</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>      .groupby(<span class="st">"order_id"</span>, as_index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>      .agg(</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>          arrival_time<span class="op">=</span>(<span class="st">"order_purchase_timestamp"</span>, <span class="st">"min"</span>),</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>          delivery_time<span class="op">=</span>(<span class="st">"order_delivered_customer_date"</span>, <span class="st">"max"</span>),</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>          weight<span class="op">=</span>(<span class="st">"payment_value"</span>, <span class="st">"sum"</span>),</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>orders[<span class="st">"processing_time_days"</span>] <span class="op">=</span> (</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    (orders[<span class="st">"delivery_time"</span>] <span class="op">-</span> orders[<span class="st">"arrival_time"</span>]).dt.total_seconds() <span class="op">/</span> <span class="fl">86400.0</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Keep valid jobs</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>orders <span class="op">=</span> orders[(orders[<span class="st">"processing_time_days"</span>] <span class="op">&gt;</span> <span class="dv">0</span>) <span class="op">&amp;</span> (orders[<span class="st">"weight"</span>] <span class="op">&gt;</span> <span class="dv">0</span>)].copy()</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="co"># 2) Helper: build schedule + compute metrics</span></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a><span class="co"># (matches your "time-zero" completion/flow definition)</span></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_and_score(schedule_df: pd.DataFrame, policy: <span class="bu">str</span>):</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>    sched <span class="op">=</span> schedule_df.copy().reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>    sched[<span class="st">"policy"</span>] <span class="op">=</span> policy</span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Completion time from time zero (no idle time), like your cumsum/loop</span></span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>    sched[<span class="st">"C_days"</span>] <span class="op">=</span> sched[<span class="st">"processing_time_days"</span>].cumsum()</span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Weighted completion cost</span></span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>    sched[<span class="st">"wC"</span>] <span class="op">=</span> sched[<span class="st">"weight"</span>] <span class="op">*</span> sched[<span class="st">"C_days"</span>]</span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Cumulative curve for plotting</span></span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>    sched[<span class="st">"cum_wC"</span>] <span class="op">=</span> sched[<span class="st">"wC"</span>].cumsum()</span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>    metrics <span class="op">=</span> {</span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a>        <span class="st">"policy"</span>: policy,</span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a>        <span class="st">"n_jobs"</span>: <span class="bu">len</span>(sched),</span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a>        <span class="st">"total_wC"</span>: sched[<span class="st">"wC"</span>].<span class="bu">sum</span>(),               <span class="co"># objective: sum w_j C_j</span></span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a>        <span class="st">"avg_C_days"</span>: sched[<span class="st">"C_days"</span>].mean(),</span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>        <span class="st">"avg_wC"</span>: sched[<span class="st">"wC"</span>].mean(),</span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> sched, metrics</span>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a><span class="co">#Construct schedules</span></span>
+<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a><span class="co"># FCFS: by arrival</span></span>
+<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a>fcfs_df <span class="op">=</span> orders.sort_values([<span class="st">"arrival_time"</span>, <span class="st">"order_id"</span>], ascending<span class="op">=</span>[<span class="va">True</span>, <span class="va">True</span>])</span>
+<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a><span class="co"># SPT: by processing time</span></span>
+<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a>spt_df <span class="op">=</span> orders.sort_values([<span class="st">"processing_time_days"</span>, <span class="st">"order_id"</span>], ascending<span class="op">=</span>[<span class="va">True</span>, <span class="va">True</span>])</span>
+<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a><span class="co"># WSPT: by weight/processing_time (descending)</span></span>
+<span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a>orders[<span class="st">"wspt_index"</span>] <span class="op">=</span> orders[<span class="st">"weight"</span>] <span class="op">/</span> orders[<span class="st">"processing_time_days"</span>]</span>
+<span id="cb16-52"><a href="#cb16-52" aria-hidden="true" tabindex="-1"></a>wspt_df <span class="op">=</span> orders.sort_values([<span class="st">"wspt_index"</span>, <span class="st">"order_id"</span>], ascending<span class="op">=</span>[<span class="va">False</span>, <span class="va">True</span>])</span>
+<span id="cb16-53"><a href="#cb16-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-54"><a href="#cb16-54" aria-hidden="true" tabindex="-1"></a><span class="co">#Evaluate schedules</span></span>
+<span id="cb16-55"><a href="#cb16-55" aria-hidden="true" tabindex="-1"></a>sched_wspt, m_wspt <span class="op">=</span> build_and_score(wspt_df, <span class="st">"WSPT"</span>)</span>
+<span id="cb16-56"><a href="#cb16-56" aria-hidden="true" tabindex="-1"></a>sched_spt,  m_spt  <span class="op">=</span> build_and_score(spt_df,  <span class="st">"SPT"</span>)</span>
+<span id="cb16-57"><a href="#cb16-57" aria-hidden="true" tabindex="-1"></a>sched_fcfs, m_fcfs <span class="op">=</span> build_and_score(fcfs_df, <span class="st">"FCFS"</span>)</span>
+<span id="cb16-58"><a href="#cb16-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-59"><a href="#cb16-59" aria-hidden="true" tabindex="-1"></a>comparison <span class="op">=</span> pd.DataFrame([m_wspt, m_spt, m_fcfs]).sort_values(<span class="st">"total_wC"</span>).reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb16-60"><a href="#cb16-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-61"><a href="#cb16-61" aria-hidden="true" tabindex="-1"></a><span class="co">#Statistical % improvement</span></span>
+<span id="cb16-62"><a href="#cb16-62" aria-hidden="true" tabindex="-1"></a><span class="co"># (lower total_wC is better)</span></span>
+<span id="cb16-63"><a href="#cb16-63" aria-hidden="true" tabindex="-1"></a>total_fcfs <span class="op">=</span> <span class="bu">float</span>(comparison.loc[comparison[<span class="st">"policy"</span>] <span class="op">==</span> <span class="st">"FCFS"</span>, <span class="st">"total_wC"</span>].values[<span class="dv">0</span>])</span>
+<span id="cb16-64"><a href="#cb16-64" aria-hidden="true" tabindex="-1"></a>total_spt  <span class="op">=</span> <span class="bu">float</span>(comparison.loc[comparison[<span class="st">"policy"</span>] <span class="op">==</span> <span class="st">"SPT"</span>,  <span class="st">"total_wC"</span>].values[<span class="dv">0</span>])</span>
+<span id="cb16-65"><a href="#cb16-65" aria-hidden="true" tabindex="-1"></a>total_wspt <span class="op">=</span> <span class="bu">float</span>(comparison.loc[comparison[<span class="st">"policy"</span>] <span class="op">==</span> <span class="st">"WSPT"</span>, <span class="st">"total_wC"</span>].values[<span class="dv">0</span>])</span>
+<span id="cb16-66"><a href="#cb16-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-67"><a href="#cb16-67" aria-hidden="true" tabindex="-1"></a><span class="co"># Improvement of WSPT compared to baselines</span></span>
+<span id="cb16-68"><a href="#cb16-68" aria-hidden="true" tabindex="-1"></a>wspt_vs_fcfs_pct <span class="op">=</span> (total_fcfs <span class="op">-</span> total_wspt) <span class="op">/</span> total_fcfs <span class="op">*</span> <span class="fl">100.0</span></span>
+<span id="cb16-69"><a href="#cb16-69" aria-hidden="true" tabindex="-1"></a>wspt_vs_spt_pct  <span class="op">=</span> (total_spt  <span class="op">-</span> total_wspt) <span class="op">/</span> total_spt  <span class="op">*</span> <span class="fl">100.0</span></span>
+<span id="cb16-70"><a href="#cb16-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-71"><a href="#cb16-71" aria-hidden="true" tabindex="-1"></a><span class="co"># Add columns to summary table</span></span>
+<span id="cb16-72"><a href="#cb16-72" aria-hidden="true" tabindex="-1"></a>comparison[<span class="st">"pct_improve_vs_FCFS"</span>] <span class="op">=</span> (total_fcfs <span class="op">-</span> comparison[<span class="st">"total_wC"</span>]) <span class="op">/</span> total_fcfs <span class="op">*</span> <span class="fl">100.0</span></span>
+<span id="cb16-73"><a href="#cb16-73" aria-hidden="true" tabindex="-1"></a>comparison[<span class="st">"pct_improve_vs_SPT"</span>]  <span class="op">=</span> (total_spt  <span class="op">-</span> comparison[<span class="st">"total_wC"</span>]) <span class="op">/</span> total_spt  <span class="op">*</span> <span class="fl">100.0</span></span>
+<span id="cb16-74"><a href="#cb16-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-75"><a href="#cb16-75" aria-hidden="true" tabindex="-1"></a><span class="co"># set baselines to 0 where appropriate (nice presentation)</span></span>
+<span id="cb16-76"><a href="#cb16-76" aria-hidden="true" tabindex="-1"></a>comparison.loc[comparison[<span class="st">"policy"</span>] <span class="op">==</span> <span class="st">"FCFS"</span>, <span class="st">"pct_improve_vs_FCFS"</span>] <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb16-77"><a href="#cb16-77" aria-hidden="true" tabindex="-1"></a>comparison.loc[comparison[<span class="st">"policy"</span>] <span class="op">==</span> <span class="st">"SPT"</span>,  <span class="st">"pct_improve_vs_SPT"</span>]  <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb16-78"><a href="#cb16-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-79"><a href="#cb16-79" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"=== Comparison (lower total_wC is better) ==="</span>)</span>
+<span id="cb16-80"><a href="#cb16-80" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(comparison)</span>
+<span id="cb16-81"><a href="#cb16-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-82"><a href="#cb16-82" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">=== Key Improvements ==="</span>)</span>
+<span id="cb16-83"><a href="#cb16-83" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"WSPT vs FCFS: </span><span class="sc">{</span>wspt_vs_fcfs_pct<span class="sc">:.2f}</span><span class="ss">% improvement (lower total weighted completion cost)"</span>)</span>
+<span id="cb16-84"><a href="#cb16-84" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"WSPT vs SPT : </span><span class="sc">{</span>wspt_vs_spt_pct<span class="sc">:.2f}</span><span class="ss">% improvement (lower total weighted completion cost)"</span>)</span>
+<span id="cb16-85"><a href="#cb16-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-86"><a href="#cb16-86" aria-hidden="true" tabindex="-1"></a><span class="co">#Plot cumulative weighted completion cost curves</span></span>
+<span id="cb16-87"><a href="#cb16-87" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb16-88"><a href="#cb16-88" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb16-89"><a href="#cb16-89" aria-hidden="true" tabindex="-1"></a>plt.plot(np.arange(<span class="dv">1</span>, <span class="bu">len</span>(sched_wspt) <span class="op">+</span> <span class="dv">1</span>), sched_wspt[<span class="st">"cum_wC"</span>], label<span class="op">=</span><span class="st">"WSPT"</span>)</span>
+<span id="cb16-90"><a href="#cb16-90" aria-hidden="true" tabindex="-1"></a>plt.plot(np.arange(<span class="dv">1</span>, <span class="bu">len</span>(sched_spt)  <span class="op">+</span> <span class="dv">1</span>), sched_spt[<span class="st">"cum_wC"</span>],  label<span class="op">=</span><span class="st">"SPT"</span>)</span>
+<span id="cb16-91"><a href="#cb16-91" aria-hidden="true" tabindex="-1"></a>plt.plot(np.arange(<span class="dv">1</span>, <span class="bu">len</span>(sched_fcfs) <span class="op">+</span> <span class="dv">1</span>), sched_fcfs[<span class="st">"cum_wC"</span>], label<span class="op">=</span><span class="st">"FCFS"</span>)</span>
+<span id="cb16-92"><a href="#cb16-92" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Job position in sequence (k)"</span>)</span>
+<span id="cb16-93"><a href="#cb16-93" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Cumulative cost  Σ_{m≤k} w_m C_m"</span>)</span>
+<span id="cb16-94"><a href="#cb16-94" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Cumulative Weighted Completion Cost Curves"</span>)</span>
+<span id="cb16-95"><a href="#cb16-95" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb16-96"><a href="#cb16-96" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb16-97"><a href="#cb16-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-98"><a href="#cb16-98" aria-hidden="true" tabindex="-1"></a><span class="co"># Optional: save outputs</span></span>
+<span id="cb16-99"><a href="#cb16-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-100"><a href="#cb16-100" aria-hidden="true" tabindex="-1"></a>comparison.to_csv(<span class="st">"schedule_comparison_with_improvements.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb16-101"><a href="#cb16-101" aria-hidden="true" tabindex="-1"></a>sched_wspt.to_csv(<span class="st">"schedule_wspt_detailed.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb16-102"><a href="#cb16-102" aria-hidden="true" tabindex="-1"></a>sched_spt.to_csv(<span class="st">"schedule_spt_detailed.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb16-103"><a href="#cb16-103" aria-hidden="true" tabindex="-1"></a>sched_fcfs.to_csv(<span class="st">"schedule_fcfs_detailed.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>=== Comparison (lower total_wC is better) ===
+  policy  n_jobs      total_wC     avg_C_days        avg_wC  \
+0   WSPT   96460  4.592291e+12  483201.002471  4.760824e+07   
+1    SPT   96460  8.327334e+12  388701.011143  8.632940e+07   
+2   FCFS   96460  1.262634e+13  635798.543436  1.308971e+08   
+
+   pct_improve_vs_FCFS  pct_improve_vs_SPT  
+0            63.629273           44.852813  
+1            34.047902            0.000000  
+2             0.000000          -51.625198  
+
+=== Key Improvements ===
+WSPT vs FCFS: 63.63% improvement (lower total weighted completion cost)
+WSPT vs SPT : 44.85% improvement (lower total weighted completion cost)</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="order_scheduling_report_files/figure-html/cell-11-output-2.png" width="608" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Analysis</strong> #### 1. What Is Being Compared</p>
+<p>All three scheduling policies are evaluated using the same objective function:</p>
+<p><span class="math display">\[
+\sum_{j=1}^{n} w_j C_j
+\]</span></p>
+<p>where:</p>
+<ul>
+<li><span class="math inline">\(w_j\)</span> = payment value (importance of order <span class="math inline">\(j\)</span>)<br>
+</li>
+<li><span class="math inline">\(C_j\)</span> = completion time of order <span class="math inline">\(j\)</span></li>
+</ul>
+<p><strong>Lower <code>total_wC</code> means better economic performance</strong>, because high-value orders are completed earlier.</p>
+<hr>
+<section id="interpreting-each-column" class="level4">
+<h4 class="anchored" data-anchor-id="interpreting-each-column">2. Interpreting Each Column</h4>
+<section id="total-weighted-completion-cost-total_wc" class="level5">
+<h5 class="anchored" data-anchor-id="total-weighted-completion-cost-total_wc">Total Weighted Completion Cost (<code>total_wC</code>)</h5>
+<p>This metric is defined as:</p>
+<p><span class="math display">\[
+\text{total\_wC} = \sum_{j=1}^{n} w_j C_j
+\]</span></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Policy</th>
+<th>total_wC</th>
+<th>Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>WSPT</strong></td>
+<td><span class="math display">\[4.59 \times 10^{12}\]</span></td>
+<td><strong>Best (lowest cost)</strong></td>
+</tr>
+<tr class="even">
+<td>SPT</td>
+<td><span class="math display">\[8.33 \times 10^{12}\]</span></td>
+<td>Much higher cost</td>
+</tr>
+<tr class="odd">
+<td>FCFS</td>
+<td><span class="math display">\[1.26 \times 10^{13}\]</span></td>
+<td>Worst</td>
+</tr>
+</tbody>
+</table>
+<p><strong>WSPT produces far less delay when weighted by payment value.</strong></p>
+<hr>
+</section>
+<section id="average-completion-time-avg_c_days" class="level5">
+<h5 class="anchored" data-anchor-id="average-completion-time-avg_c_days">Average Completion Time (<code>avg_C_days</code>)</h5>
+<p>This is the average time until an order completes:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Policy</th>
+<th>avg_C_days</th>
+<th>Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>SPT</td>
+<td>388,701</td>
+<td><strong>Shortest average completion time</strong></td>
+</tr>
+<tr class="even">
+<td>WSPT</td>
+<td>483,201</td>
+<td>Slightly slower on average</td>
+</tr>
+<tr class="odd">
+<td>FCFS</td>
+<td>635,799</td>
+<td>Slowest</td>
+</tr>
+</tbody>
+</table>
+<p><strong>SPT minimizes average completion time</strong>, not weighted cost.</p>
+<hr>
+</section>
+<section id="average-weighted-completion-cost-avg_wc" class="level5">
+<h5 class="anchored" data-anchor-id="average-weighted-completion-cost-avg_wc">Average Weighted Completion Cost (<code>avg_wC</code>)</h5>
+<p>This measures the average economic delay per order:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Policy</th>
+<th>avg_wC</th>
+<th>Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>WSPT</strong></td>
+<td><span class="math display">\[4.76 \times 10^{7}\]</span></td>
+<td><strong>Lowest economic delay</strong></td>
+</tr>
+<tr class="even">
+<td>SPT</td>
+<td><span class="math display">\[8.63 \times 10^{7}\]</span></td>
+<td>Almost double</td>
+</tr>
+<tr class="odd">
+<td>FCFS</td>
+<td><span class="math display">\[1.31 \times 10^{8}\]</span></td>
+<td>Nearly triple</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+</section>
+<section id="percent-improvement-columns-key-insight" class="level4">
+<h4 class="anchored" data-anchor-id="percent-improvement-columns-key-insight">3. Percent Improvement Columns (Key Insight)</h4>
+<section id="improvement-vs-fcfs-pct_improve_vs_fcfs" class="level5">
+<h5 class="anchored" data-anchor-id="improvement-vs-fcfs-pct_improve_vs_fcfs">Improvement vs FCFS (<code>pct_improve_vs_FCFS</code>)</h5>
+<p>Computed as:</p>
+<p><span class="math display">\[
+\frac{\text{total\_wC}_{\text{FCFS}} - \text{total\_wC}_{\text{policy}}}
+{\text{total\_wC}_{\text{FCFS}}}
+\times 100
+\]</span></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 42%">
+<col style="width: 57%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Policy</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>WSPT = 63.63%</strong></td>
+<td>WSPT reduces weighted delay cost by <strong>63.6%</strong> vs FCFS</td>
+</tr>
+<tr class="even">
+<td>SPT = 34.05%</td>
+<td>Better than FCFS, but far worse than WSPT</td>
+</tr>
+<tr class="odd">
+<td>FCFS = 0%</td>
+<td>Baseline</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="improvement-vs-spt-pct_improve_vs_spt" class="level5">
+<h5 class="anchored" data-anchor-id="improvement-vs-spt-pct_improve_vs_spt">Improvement vs SPT (<code>pct_improve_vs_SPT</code>)</h5>
+<p>Computed as:</p>
+<p><span class="math display">\[
+\frac{\text{total\_wC}_{\text{SPT}} - \text{total\_wC}_{\text{policy}}}
+{\text{total\_wC}_{\text{SPT}}}
+\times 100
+\]</span></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 42%">
+<col style="width: 57%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Policy</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>WSPT = 44.85%</strong></td>
+<td>WSPT improves economic efficiency by <strong>44.9%</strong> vs SPT</td>
+</tr>
+<tr class="even">
+<td>SPT = 0%</td>
+<td>Baseline</td>
+</tr>
+<tr class="odd">
+<td>FCFS = −51.63%</td>
+<td>FCFS is <strong>51.6% worse</strong> than SPT</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+</section>
+<section id="why-wspt-wins-key-intuition" class="level4">
+<h4 class="anchored" data-anchor-id="why-wspt-wins-key-intuition">4. Why WSPT Wins (Key Intuition)</h4>
+<section id="what-each-policy-optimizes" class="level5">
+<h5 class="anchored" data-anchor-id="what-each-policy-optimizes">What Each Policy Optimizes</h5>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Policy</th>
+<th>Optimizes</th>
+<th>Ignores</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>FCFS</td>
+<td>Arrival order</td>
+<td>Time, value</td>
+</tr>
+<tr class="even">
+<td>SPT</td>
+<td>Short jobs</td>
+<td>Value</td>
+</tr>
+<tr class="odd">
+<td><strong>WSPT</strong></td>
+<td><strong>Value per unit time</strong></td>
+<td>Nothing relevant</td>
+</tr>
+</tbody>
+</table>
+<p>WSPT orders jobs by:</p>
+<p><span class="math display">\[
+\frac{w_j}{p_j}
+\]</span></p>
+<p>This implies:</p>
+<ul>
+<li>High-payment orders are completed earlier<br>
+</li>
+<li>Long, low-value orders are delayed<br>
+</li>
+<li>Economic cost grows <strong>slowest over time</strong></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="why-spt-has-lower-average-completion-time-but-worse-cost" class="level4">
+<h4 class="anchored" data-anchor-id="why-spt-has-lower-average-completion-time-but-worse-cost">5. Why SPT Has Lower Average Completion Time but Worse Cost</h4>
+<p>This is the classic scheduling tradeoff:</p>
+<p>SPT minimizes:</p>
+<p><span class="math display">\[
+\sum_{j=1}^{n} C_j
+\]</span></p>
+<p>WSPT minimizes:</p>
+<p><span class="math display">\[
+\sum_{j=1}^{n} w_j C_j
+\]</span></p>
+<p>SPT may finish many <strong>low-value</strong> jobs early, which:</p>
+<ul>
+<li>reduces average completion time<br>
+</li>
+<li>but delays <strong>high-value</strong> jobs<br>
+</li>
+<li>causing a large economic penalty</li>
+</ul>
+<p>Your data clearly demonstrates this effect.</p>
+<hr>
+</section>
+<section id="final-takeaway" class="level4">
+<h4 class="anchored" data-anchor-id="final-takeaway">6. Final Takeaway</h4>
+<blockquote class="blockquote">
+<p>Although SPT achieves the lowest average completion time, it performs poorly when job importance is considered. <strong>WSPT delivers the best overall performance</strong>, reducing total weighted completion cost by <strong>63.6% compared to FCFS</strong> and <strong>44.9% compared to SPT</strong>. This confirms both theoretically and empirically that <strong>WSPT is the optimal scheduling rule for economically weighted order fulfillment</strong>.</p>
+</blockquote>
+</section>
+</section>
+</section>
+</section>
+<section id="conclusion" class="level1">
+<h1>6 Conclusion</h1>
+<blockquote class="blockquote">
+<p>When orders have different importance levels, the best sequencing strategy to minimize <strong>total weighted delay</strong> is <strong>WSPT scheduling</strong>, which prioritizes orders by the highest <em>value per unit processing time</em> ratio: <span class="math display">\[
+\frac{w_j}{p_j}
+\]</span> This approach ensures that <strong>high-priority (high-value) orders are completed earlier</strong>, while <strong>low-priority, time-consuming orders are deferred</strong>, resulting in the lowest possible total weighted delay. In our empirical results, <strong>WSPT achieved the smallest total weighted completion cost</strong> and consistently outperformed both <strong>SPT</strong> and <strong>FCFS</strong>. This confirms both theoretically and empirically that <strong>WSPT is the preferred scheduling policy whenever order importance must be considered</strong>.</p>
+</blockquote>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
